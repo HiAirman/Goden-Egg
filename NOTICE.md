@@ -2,14 +2,6 @@
 
 Goden Egg · 会生金蛋的鸡
 
-## 第三方数据
-
-`src/data/stocks.json` 中的 A 股代码、名称、拼音缩写和行业字段，整理自
-[TurtleTrace](https://github.com/TurtleTrace2026/TurtleTrace) 项目的
-`src/data/stock-database.json`。
-
-TurtleTrace 以 Apache License 2.0 发布。原始数据的版权归其各自权利人所有；
-本项目仅保留离线检索所需的字段，并用于非商业的个人交易复盘工具。
 
 ## ETF 列表与行情
 
