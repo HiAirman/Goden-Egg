@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="16" y1="8" x2="112" y2="120" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#24483A"/>
+      <stop offset="1" stop-color="#101F19"/>
+    </linearGradient>
+    <linearGradient id="egg" x1="56" y1="60" x2="82" y2="112" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F7DF9B"/>
+      <stop offset="0.55" stop-color="#E7B95E"/>
+      <stop offset="1" stop-color="#C58B31"/>
+    </linearGradient>
+    <radialGradient id="shine" cx="0" cy="0" r="1" gradientTransform="translate(36 30) rotate(48) scale(82)">
+      <stop stop-color="#FFFFFF" stop-opacity=".14"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="128" height="128" rx="30" fill="url(#bg)"/>
+  <rect width="128" height="128" rx="30" fill="url(#shine)"/>
+  <path d="M37 64.5c-7.8-3.2-11.8-11.6-9.4-20.6 7.1 1.4 12.6 6.2 15.2 13.1" fill="#EFE4CB"/>
+  <path d="M35 78.2c0-15.7 12.6-28.4 28.3-28.4 9.1 0 17.2 4.3 22.4 11l7.5 1.8-5.8 6.8c1.3 3.3 2 6.9 2 10.6 0 17.9-14.5 31-32.4 31S35 96.1 35 78.2Z" fill="#F3EAD7"/>
+  <circle cx="78.5" cy="49.5" r="16.2" fill="#F3EAD7"/>
+  <path d="M65.8 38.3c.8-6.5 5.2-9.8 9.4-7.9 3.8 1.7 4.6 6.6 2.2 11.3" fill="#B84E3F"/>
+  <path d="M92.8 49.2c4.4-.3 7.6 1 9.4 3.5-2.6 2.5-6.1 3.4-10.1 2.4" fill="#D9A93F"/>
+  <circle cx="83.5" cy="47.3" r="2.1" fill="#14251F"/>
+  <path d="M57.8 63.6c7.4-4.1 15.1-3.8 22 1.1" stroke="#D9C9A8" stroke-width="2.2" stroke-linecap="round"/>
+  <ellipse cx="63.5" cy="89.5" rx="21.5" ry="26" fill="url(#egg)"/>
+  <path d="M49.5 94.5 57 87l6.2 5.2L75 76.5" stroke="#14251F" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="75" cy="76.5" r="2.8" fill="#14251F"/>
+  <path d="M89.2 92.2c1.8-2.9 4.2-4.3 7.2-4.2-.2 3.5-1.9 6-4.9 7.5" fill="#F3EAD7"/>
+  <path d="M101.5 32.5c.4 2.4 1.6 3.8 3.8 4.5-2.2.8-3.5 2.3-3.9 4.7-.5-2.4-1.7-3.9-3.9-4.7 2.3-.7 3.5-2.2 4-4.5Z" fill="#E7B95E"/>
+  <circle cx="26.5" cy="36" r="2.4" fill="#E7B95E" fill-opacity=".75"/>
+</svg>

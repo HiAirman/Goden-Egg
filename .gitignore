@@ -1,0 +1,68 @@
+# =========================================================
+# Goden Egg · Git ignore
+# 注意：data/ 内含个人交易记录和 AI API Key，绝对不要提交
+# =========================================================
+
+# 依赖
+node_modules/
+.pnpm-store/
+
+# 构建产物
+dist/
+release/
+build/
+*.tsbuildinfo
+
+# 本地数据与自动备份（只忽略仓库根目录）
+/data/
+/backup/
+/backups/
+*.state.json
+
+# 环境变量与本地配置
+.env
+.env.*
+!.env.example
+*.local
+
+# 日志与调试
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.pid
+
+# 开发 / 测试临时文件
+qa-shots/
+shots/
+coverage/
+playwright-report/
+test-results/
+qa.mjs
+scripts-build-etfs.mjs
+
+# 缓存
+.vite/
+.cache/
+.eslintcache
+
+# 编辑器
+.vscode/
+.idea/
+.history/
+*.swp
+*.swo
+*~
+
+# 操作系统
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# 本地压缩包与临时备份
+*.zip
+*.7z
+*.rar
+*.bak
