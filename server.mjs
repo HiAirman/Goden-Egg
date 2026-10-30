@@ -1,13 +1,16 @@
 import { createServer } from 'node:http'
-import { createReadStream, existsSync, statSync } from 'node:fs'
+import { existsSync, readFileSync, statSync } from 'node:fs'
 import { extname, join, normalize, resolve, sep } from 'node:path'
 import { exec } from 'node:child_process'
 import { clearState, getInfo, readState, writeState } from './server/stateStore.mjs'
 
-const root = resolve(process.cwd(), 'dist')
+// When bundled by pkg, __dirname points inside the read-only snapshot.
+// When running from source, fall back to the current working directory.
+const moduleDir = typeof __dirname === 'string' ? __dirname : process.cwd()
+const root = process.pkg ? resolve(moduleDir, 'dist') : resolve(process.cwd(), 'dist')
 const port = Number(process.env.PORT || 4173)
 const host = process.env.HOST || '127.0.0.1'
-const shouldOpen = process.argv.includes('--open')
+const shouldOpen = process.argv.includes('--open') || Boolean(process.pkg && !process.argv.includes('--no-open'))
 const MAX_BODY = 30 * 1024 * 1024
 
 const MIME = {
@@ -142,11 +145,13 @@ const server = createServer((req, res) => {
     }
 
     const ext = extname(filePath).toLowerCase()
+    const content = readFileSync(filePath)
     res.writeHead(200, {
       'Content-Type': MIME[ext] || 'application/octet-stream',
+      'Content-Length': content.length,
       'Cache-Control': ext === '.html' ? 'no-store' : 'public, max-age=3600',
     })
-    createReadStream(filePath).pipe(res)
+    res.end(content)
   } catch (error) {
     console.error(error)
     res.writeHead(500)

@@ -11,6 +11,8 @@ node_modules/
 dist/
 release/
 build/
+packaged-server.cjs
+GodenEgg.exe
 *.tsbuildinfo
 
 # 本地数据与自动备份（只忽略仓库根目录）

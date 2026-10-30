@@ -90,6 +90,24 @@ npm start
 npm run start:open
 ```
 
+### 单文件 EXE
+
+如果希望脱离 Node.js 直接运行，可以生成单文件 Windows 程序：
+
+```bash
+npm run build:exe
+```
+
+产物为项目根目录的 **`GodenEgg.exe`**（约 56 MB）。双击后它会：
+
+1. 启动内置的本地 HTTP 与数据服务；
+2. 自动打开浏览器 `http://127.0.0.1:4173`；
+3. 在 **exe 所在目录** 创建并使用 `data/state.json`。
+
+因此移动 exe 时，请把旁边的 `data/` 一起移动。关闭控制台窗口即停止服务。
+
+> exe 未做代码签名，Windows SmartScreen 可能提示“未知发布者”。数据仍然只写入本地 `data/`，不会上传。
+
 ## 开发
 
 前端开发使用 Vite 热更新，同时需要 Node 数据服务：

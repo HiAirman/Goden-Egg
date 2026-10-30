@@ -14,7 +14,9 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview --host 127.0.0.1 --port 4173",
     "start": "node server.mjs",
-    "start:open": "node server.mjs --open"
+    "start:open": "node server.mjs --open",
+    "build:server": "esbuild server.mjs --bundle --platform=node --format=cjs --outfile=packaged-server.cjs",
+    "build:exe": "npm run build && npm run build:server && pkg packaged-server.cjs --config pkg.config.json --targets node20-win-x64 --output GodenEgg.exe --compress GZip"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -29,6 +31,8 @@
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",
+    "@yao-pkg/pkg": "^6.24.0",
+    "esbuild": "^0.28.2",
     "typescript": "~5.9.3",
     "vite": "^7.3.1"
   }
