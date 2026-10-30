@@ -16,7 +16,7 @@
     "start": "node server.mjs",
     "start:open": "node server.mjs --open",
     "build:server": "esbuild server.mjs --bundle --platform=node --format=cjs --outfile=packaged-server.cjs",
-    "build:exe": "npm run build && npm run build:server && pkg packaged-server.cjs --config pkg.config.json --targets node20-win-x64 --output GodenEgg.exe --compress GZip"
+    "build:exe": "npm run build && npm run build:server && pkg packaged-server.cjs --config pkg.config.json --targets node22-win-x64 --output GodenEgg.exe --compress GZip"
   },
   "dependencies": {
     "clsx": "^2.1.1",

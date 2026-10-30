@@ -9,6 +9,8 @@ import { clearState, getInfo, readState, writeState } from './server/stateStore.
 const moduleDir = typeof __dirname === 'string' ? __dirname : process.cwd()
 const root = process.pkg ? resolve(moduleDir, 'dist') : resolve(process.cwd(), 'dist')
 const port = Number(process.env.PORT || 4173)
+let activePort = port
+let portRetries = 0
 const host = process.env.HOST || '127.0.0.1'
 const shouldOpen = process.argv.includes('--open') || Boolean(process.pkg && !process.argv.includes('--no-open'))
 const MAX_BODY = 30 * 1024 * 1024
@@ -118,7 +120,7 @@ async function handleApi(req, res, url) {
 
 const server = createServer((req, res) => {
   try {
-    const url = new URL(req.url || '/', `http://${host}:${port}`)
+    const url = new URL(req.url || '/', `http://${host}:${activePort}`)
 
     if (url.pathname.startsWith('/api/')) {
       void handleApi(req, res, url)
@@ -159,8 +161,8 @@ const server = createServer((req, res) => {
   }
 })
 
-server.listen(port, host, async () => {
-  const url = `http://${host}:${port}`
+server.listen(activePort, host, async () => {
+  const url = `http://${host}:${activePort}`
   const info = await getInfo().catch(() => null)
   console.log('\n  Goden Egg · 会生金蛋的鸡')
   console.log(`  本地服务已启动：${url}`)
@@ -183,7 +185,15 @@ server.listen(port, host, async () => {
 
 server.on('error', (error) => {
   if (error.code === 'EADDRINUSE') {
-    console.error(`\n[Goden Egg] 端口 ${port} 已被占用。关闭占用程序，或设置 PORT 后重试。\n`)
+    // A second copy should still work: try the next port automatically.
+    if (process.pkg && !process.env.PORT && portRetries < 20) {
+      portRetries += 1
+      activePort += 1
+      console.log(`\n[Goden Egg] 端口 ${activePort - 1} 已被占用，尝试 ${activePort}...\n`)
+      setTimeout(() => server.listen(activePort, host), 120)
+      return
+    }
+    console.error(`\n[Goden Egg] 端口 ${activePort} 已被占用。关闭占用程序，或设置 PORT 后重试。\n`)
   } else {
     console.error(error)
   }
