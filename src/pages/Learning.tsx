@@ -34,6 +34,8 @@ import {
   Segmented,
 } from '../components/ui'
 import { BOOKS, COURSES, LEARNING_TIP, type LearningResource } from '../data/learning'
+import { QUOTES } from '../data/quotes'
+import { QuoteLine } from '../components/BookQuote'
 import { markdownToHtml, stripMarkdown } from '../lib/markdown'
 import { relativeTime } from '../lib/dates'
 import type { Note } from '../types'
@@ -357,8 +359,8 @@ export function Learning() {
     <div className="page learning-page">
       <PageHeader
         eyebrow="工具箱 / 学习笔记"
-        title="把学到的东西，变成自己的规则"
-        description="经典教材、公开课和你的 Markdown 笔记。学习不是收藏，是把它写进下一次决策。"
+        title="学习笔记"
+        description={<QuoteLine quote={QUOTES.houselBehavior} />}
         actions={
           <Button icon={<NotebookPen size={15} />} onClick={() => setTab('notes')}>
             我的笔记 · {state.notes.length}

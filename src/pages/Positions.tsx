@@ -33,6 +33,8 @@ import type { PositionMeta, PositionView } from '../types'
 import { SECTORS } from '../lib/constants'
 import { daysUntil, todayStr } from '../lib/dates'
 import { isTradingDay, restDayLabel } from '../lib/tradingCalendar'
+import { QUOTES } from '../data/quotes'
+import { QuoteLine } from '../components/BookQuote'
 import {
   formatCurrency,
   formatMoney,
@@ -338,8 +340,15 @@ export function Positions() {
     <div className="page positions-page">
       <PageHeader
         eyebrow="工作台 / 持仓"
-        title="把每一颗蛋，都放在看得见的地方"
-        description={`${active.length} 只持仓 · 总市值 ${formatCurrency(totals.marketValue)} · 可用现金 ${formatCurrency(totals.cash)}`}
+        title="持仓与风险边界"
+        description={
+          <>
+            <QuoteLine quote={QUOTES.lynchOwn} />
+            <span className="page-header-meta">
+              {active.length} 只持仓 · 总市值 {formatCurrency(totals.marketValue)} · 可用现金 {formatCurrency(totals.cash)}
+            </span>
+          </>
+        }
         actions={
           <>
             <Button variant="secondary" icon={<RefreshCw size={15} />} onClick={() => setPricePosition(active[0] ?? null)} disabled={active.length === 0}>
@@ -383,7 +392,7 @@ export function Positions() {
           <EmptyState
             icon={<Layers size={30} />}
             title={positions.length === 0 ? '还没有持仓' : '没有匹配的持仓'}
-            description={positions.length === 0 ? '从记录第一笔买入开始，建立你的持仓档案。' : '换个关键词，或者显示已清仓的股票。'}
+            description={positions.length === 0 ? '记录第一笔买入，建立持仓成本、批次和风险边界。' : '调整关键词，或者显示已清仓的股票。'}
             action={positions.length === 0 ? <Button onClick={() => openTrade()}>记录第一笔买入</Button> : null}
           />
         ) : (

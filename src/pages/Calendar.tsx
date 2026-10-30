@@ -220,8 +220,8 @@ export function Calendar() {
     <div className="page calendar-page">
       <PageHeader
         eyebrow="复盘与迭代 / 日历"
-        title="把重要的日子，提前放进视野"
-        description="财报、解禁、宏观数据和复盘计划，都是决策的输入。"
+        title="事件日历"
+        description="财报、解禁、宏观事件与复盘计划集中在这里。"
         actions={<Button icon={<Plus size={16} />} onClick={openCreate}>添加事件</Button>}
       />
 

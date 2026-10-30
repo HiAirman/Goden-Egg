@@ -42,14 +42,14 @@ export type PageKey =
   | 'settings'
 
 export const PAGE_META: Record<PageKey, { title: string; eyebrow: string; description: string }> = {
-  dashboard: { title: '总览', eyebrow: '工作台', description: '把持仓、交易和复盘放在同一张桌面上。' },
-  positions: { title: '持仓', eyebrow: '工作台', description: '看清每一笔持仓的成本、批次和风险边界。' },
-  trades: { title: '交易流水', eyebrow: '工作台', description: '每一笔买卖都值得被记录，也值得被追问。' },
-  reviews: { title: '复盘', eyebrow: '复盘与迭代', description: '记录市场、操作和情绪，把经验沉淀成系统。' },
-  analytics: { title: '分析', eyebrow: '复盘与迭代', description: '用数据看清优势、短板和真实的交易风格。' },
-  calendar: { title: '日历', eyebrow: '复盘与迭代', description: '财报、解禁、宏观事件和复盘计划，一目了然。' },
-  watchlist: { title: '自选池', eyebrow: '工具箱', description: '等待好价格，也等待逻辑被验证。' },
-  tools: { title: '做 T 计算器', eyebrow: '工具箱', description: '把费用算清楚，才知道这笔 T 到底值不值得做。' },
+  dashboard: { title: '总览', eyebrow: '工作台', description: '总资产、持仓、交易与复盘的日常入口。' },
+  positions: { title: '持仓', eyebrow: '工作台', description: '成本、批次、止损与目标价。' },
+  trades: { title: '交易流水', eyebrow: '工作台', description: '成交记录、费用与操作标签。' },
+  reviews: { title: '复盘', eyebrow: '复盘与迭代', description: '每日与每周复盘记录。' },
+  analytics: { title: '分析', eyebrow: '复盘与迭代', description: '胜率、回撤、归因与持仓结构。' },
+  calendar: { title: '日历', eyebrow: '复盘与迭代', description: '财报、解禁、宏观事件和复盘计划。' },
+  watchlist: { title: '自选池', eyebrow: '工具箱', description: '关注逻辑、目标价与止损价。' },
+  tools: { title: '做 T 计算器', eyebrow: '工具箱', description: '费用、净收益与盈亏平衡价。' },
   learning: { title: '学习笔记', eyebrow: '工具箱', description: '经典教材、公开课与自己的 Markdown 笔记。' },
   settings: { title: '设置', eyebrow: '系统', description: '账户、费率、行情和数据备份。' },
 }

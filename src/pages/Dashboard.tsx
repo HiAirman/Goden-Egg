@@ -45,6 +45,8 @@ import {
   pnlClass,
 } from '../lib/format'
 import { EVENT_COLORS } from '../lib/constants'
+import { QUOTES } from '../data/quotes'
+import { QuoteLine } from '../components/BookQuote'
 import type { PageKey } from '../components/Layout'
 
 const SECTOR_COLORS = ['#2f6b4f', '#c28b3e', '#4e6b8a', '#a8483f', '#6f5b8a', '#3b7d7d', '#8a6d55', '#7b8178']
@@ -159,24 +161,24 @@ export function Dashboard({ onNavigate }: { onNavigate: (page: PageKey) => void 
           <h1>
             {tradingDay ? (
               <>
-                {greeting()}，让今天的金蛋
-                <em>再大一点</em>。
+                {greeting()}。先看清风险，
+                <em>再谈收益</em>。
               </>
             ) : (
               <>
-                今天休市，休息也是一种
-                <em>纪律</em>。
+                今天休市，不交易，
+                <em>不生成每日复盘</em>。
               </>
             )}
           </h1>
           <p>
             {!tradingDay
-              ? `${restLabel}，A股今天不交易。没有行情，也不需要为了复盘而复盘；可以回看上一个交易日，或者写本周复盘。`
+              ? `${restLabel}，A股不交易，也不会生成每日复盘。可以回看上一交易日，或整理本周交易。`
               : todayReview
-                ? '今天的复盘已经写下。回看一遍，把结论变成明天的动作。'
+                ? '今天的复盘已记录，可以继续补充。'
                 : todayTrades.length > 0
-                  ? `今天有 ${todayTrades.length} 笔交易，趁记忆还热，写下当时的判断。`
-                  : '市场每天都在给答案，但只有复盘能把答案变成你的系统。'}
+                  ? `今天有 ${todayTrades.length} 笔交易，核对成交时间、费用和理由。`
+                  : '没有交易也可以记录观察；有交易则先写事实。'}
           </p>
           <div className="hero-actions">
             {tradingDay ? (
@@ -310,7 +312,7 @@ export function Dashboard({ onNavigate }: { onNavigate: (page: PageKey) => void 
           <div className="panel-head">
             <div>
               <span className="panel-kicker">资产曲线</span>
-              <h2>慢慢变富，也是一种速度</h2>
+              <h2>资产净值曲线</h2>
             </div>
             <div className="range-tabs">
               {(['1M', '3M', '1Y', 'ALL'] as const).map((item) => (
@@ -334,13 +336,16 @@ export function Dashboard({ onNavigate }: { onNavigate: (page: PageKey) => void 
               快照 {state.snapshots.length} 天 · 最近更新 {state.snapshots.length ? relativeTime(state.snapshots[state.snapshots.length - 1].createdAt) : '尚未更新'}
             </span>
           </div>
+          <div className="panel-quote">
+            <QuoteLine quote={QUOTES.bogleEnemies} />
+          </div>
         </Card>
 
         <Card className="panel allocation-panel">
           <div className="panel-head">
             <div>
               <span className="panel-kicker">持仓结构</span>
-              <h2>鸡蛋放在几个篮子里？</h2>
+              <h2>行业与仓位分布</h2>
             </div>
             <Badge tone="neutral">{activePositions.length} 只</Badge>
           </div>
@@ -354,7 +359,7 @@ export function Dashboard({ onNavigate }: { onNavigate: (page: PageKey) => void 
           <div className="panel-head">
             <div>
               <span className="panel-kicker">核心持仓</span>
-              <h2>今天谁在替你下蛋</h2>
+              <h2>当前持仓</h2>
             </div>
             <button type="button" className="panel-link inline" onClick={() => onNavigate('positions')}>
               全部持仓 <ArrowUpRight size={14} />
@@ -365,7 +370,7 @@ export function Dashboard({ onNavigate }: { onNavigate: (page: PageKey) => void 
               compact
               icon={<Egg size={26} />}
               title="还没有持仓"
-              description="记录第一笔买入，开始养你的金蛋。"
+              description="记录第一笔买入，建立持仓档案。"
               action={<Button size="sm" onClick={() => openTrade()}>添加买入</Button>}
             />
           ) : (
@@ -459,7 +464,7 @@ export function Dashboard({ onNavigate }: { onNavigate: (page: PageKey) => void 
               <div className="rest-todo">
                 <div className="rest-todo-icon"><Coffee size={22} /></div>
                 <strong>{restLabel}</strong>
-                <p>不用盯盘，不用复盘。让大脑也休市一天。</p>
+                <p>休市日没有交易和每日复盘。可以回看上一交易日，或写周复盘。</p>
                 <div className="rest-todo-actions">
                   <Button size="sm" variant="secondary" onClick={() => { window.location.hash = `#/reviews?date=${previousTrading}` }}>
                     上一交易日
@@ -513,8 +518,8 @@ export function Dashboard({ onNavigate }: { onNavigate: (page: PageKey) => void 
                 <>
                   已平仓交易胜率 <strong>{analytics.winRate.toFixed(0)}%</strong>，
                   {analytics.avgWin > Math.abs(analytics.avgLoss)
-                    ? '平均盈利大于平均亏损，继续保持让利润奔跑。'
-                    : '平均亏损大于平均盈利，先检查止损是否执行到位。'}
+                    ? '平均盈利大于平均亏损；继续检查止损与仓位是否符合计划。'
+                    : '平均亏损大于平均盈利；优先检查止损是否执行到位。'}
                 </>
               ) : (
                 '还没有已平仓交易。完成第一笔卖出后，这里会出现你的交易画像。'
@@ -532,14 +537,14 @@ export function Dashboard({ onNavigate }: { onNavigate: (page: PageKey) => void 
         <div className="panel-head">
           <div>
             <span className="panel-kicker">最近动作</span>
-            <h2>每一笔，都算数</h2>
+            <h2>最近交易</h2>
           </div>
           <button type="button" className="panel-link inline" onClick={() => onNavigate('trades')}>
             全部流水 <ArrowUpRight size={14} />
           </button>
         </div>
         {recentTrades.length === 0 ? (
-          <EmptyState compact title="还没有交易记录" description="第一笔交易，是复盘的起点。" action={<Button size="sm" onClick={() => openTrade()}>记录交易</Button>} />
+          <EmptyState compact title="还没有交易记录" description="记录第一笔交易后，这里会显示最近流水。" action={<Button size="sm" onClick={() => openTrade()}>记录交易</Button>} />
         ) : (
           <div className="recent-trade-list">
             {recentTrades.map((trade) => (

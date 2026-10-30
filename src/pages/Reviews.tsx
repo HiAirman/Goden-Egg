@@ -37,6 +37,8 @@ import {
 } from '../components/ui'
 import type { DailyReview, MarketMood, ReviewIndex, Trade, WeeklyReview } from '../types'
 import { chatWithAi } from '../lib/ai'
+import { QUOTES } from '../data/quotes'
+import { QuoteLine } from '../components/BookQuote'
 import {
   isTradingDay,
   nextTradingDay,
@@ -277,10 +279,10 @@ function RestDayPanel({
     <Card className="rest-day-panel">
       <div className="rest-day-icon"><Coffee size={28} /></div>
       <span className="panel-kicker">{isToday ? '今天' : dateShort(date)}</span>
-      <h2>{isToday ? '今天休市，休息也是一种纪律。' : `${label}，不用复盘。`}</h2>
+      <h2>{isToday ? '今天休市，不生成每日复盘。' : `${label}，不生成每日复盘。`}</h2>
       <p>
-        {label}，A股不交易，也不需要为了复盘而复盘。
-        可以去写本周复盘，或者回看上一个交易日的记录。
+        {label}，A股不交易，也不产生交易记录。
+        可以写本周复盘，或者回看上一个交易日的记录。
       </p>
       {existing ? (
         <div className="rest-day-legacy">
@@ -608,7 +610,7 @@ function DailyEditor({ date }: { date: string }) {
       <Card className="review-section">
         <div className="review-section-head">
           <span className="section-icon"><Flame size={16} /></span>
-          <div><h3>情绪与纪律</h3><p>交易的结果，常常是情绪的影子。</p></div>
+          <div><h3>情绪与纪律</h3><p>记录当时的情绪与执行偏差。</p></div>
           <div className="discipline-score">
             <span>纪律评分</span>
             <strong>{draft.disciplineScore}<small>/5</small></strong>
@@ -894,8 +896,8 @@ export function Reviews() {
     <div className="page reviews-page">
       <PageHeader
         eyebrow="复盘与迭代"
-        title="把一天的噪音，熬成自己的方法"
-        description="不必写很长。写清楚事实、判断和下一步，就已经胜过大多数交易者。"
+        title="复盘记录"
+        description={<QuoteLine quote={QUOTES.marksPrepare} />}
         actions={
           <div className="review-header-actions">
             <Badge tone="green"><Flame size={12} /> 共 {state.reviews.length} 篇记录</Badge>

@@ -213,7 +213,7 @@ export function Settings() {
     <div className="page settings-page">
       <PageHeader
         eyebrow="系统 / 设置"
-        title="把规则定好，让执行变简单"
+        title="账户、费率与数据"
         description="账户、费率、行情和笔记都通过本地 Node 服务写入 data/state.json。"
         actions={<Badge tone="green"><ShieldCheck size={12} /> 本地优先</Badge>}
       />
@@ -408,7 +408,7 @@ export function Settings() {
               <span>会生金蛋的鸡 · v1.0.0</span>
             </div>
           </div>
-          <p>一个本地优先的个人股票交易与复盘工作台。数据由本机 Node 服务写入 JSON 文件，不预测市场，只帮你看清自己。</p>
+          <p>一个本地优先的个人股票交易与复盘工作台。数据由本机 Node 服务写入 JSON 文件，用于记录交易事实、检查决策过程。</p>
           <div className="about-meta">
             <span><ShieldCheck size={13} /> 无需注册</span>
             <span><Database size={13} /> 本机存储</span>

@@ -27,6 +27,8 @@ import {
 } from '../components/ui'
 import type { WatchItem } from '../types'
 import { formatPrice, pnlClass, safeNumber } from '../lib/format'
+import { QUOTES } from '../data/quotes'
+import { QuoteLine } from '../components/BookQuote'
 import { getStockInfo, searchStocks, type StockInfo } from '../lib/stocks'
 
 function WatchModal({
@@ -182,8 +184,8 @@ export function Watchlist() {
     <div className="page watchlist-page">
       <PageHeader
         eyebrow="工具箱 / 自选池"
-        title="好机会，值得等一等"
-        description="把想买的股票和买入条件写下来，避免盘中临时起意。"
+        title="自选池"
+        description={<QuoteLine quote={QUOTES.mungerWait} />}
         actions={
           <>
             <Button variant="secondary" icon={<RefreshCw size={15} />} onClick={refresh}>刷新行情</Button>

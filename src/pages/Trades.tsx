@@ -26,6 +26,8 @@ import { buildPositions } from '../lib/calc'
 import { downloadText, escapeCsv } from '../lib/files'
 import { formatCurrency, formatMoney, formatPct, formatPrice, formatQuantity, pnlClass } from '../lib/format'
 import { dateShort, todayStr } from '../lib/dates'
+import { QUOTES } from '../data/quotes'
+import { QuoteLine } from '../components/BookQuote'
 
 export function Trades() {
   const { state, deleteTrade } = useStore()
@@ -114,8 +116,8 @@ export function Trades() {
     <div className="page trades-page">
       <PageHeader
         eyebrow="工作台 / 交易流水"
-        title="每一笔买卖，都是你的一面镜子"
-        description="按时间、账户和方向筛选，回看当时的判断与情绪。"
+        title="交易流水"
+        description={<QuoteLine quote={QUOTES.grahamEnemy} />}
         actions={
           <>
             <Button variant="secondary" icon={<Download size={15} />} onClick={exportCsv} disabled={filtered.length === 0}>

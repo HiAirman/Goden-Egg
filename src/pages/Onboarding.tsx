@@ -18,6 +18,7 @@ import { useUi } from '../components/UiProvider'
 import { Button, Field, Input } from '../components/ui'
 import { feeBreakdown } from '../lib/calc'
 import { DEFAULT_SETTINGS } from '../lib/constants'
+import { QUOTES } from '../data/quotes'
 import { readTextFile } from '../lib/files'
 import { formatMoney, safeNumber } from '../lib/format'
 
@@ -117,18 +118,21 @@ export function Onboarding() {
         <div className="onboarding-copy">
           <div className="onboarding-kicker"><Sparkles size={14} /> 个人股票交易与复盘工作台</div>
           <h1>
-            养一只会生
+            把交易记录，
             <br />
-            <em>金蛋</em>的鸡。
+            变成<em>决策依据</em>。
           </h1>
           <p>
-            不预测市场，只帮你看清自己。
+            记录持仓、交易、费用和复盘。
             <br />
-            记录持仓、交易、情绪和复盘，让每一笔操作都留下痕迹。
+            不预测市场，只检查自己的决策过程。
           </p>
           <div className="onboarding-quote">
             <Egg size={22} />
-            <span>“复利，是世界第八大奇迹。”</span>
+            <span>
+              “{QUOTES.grahamEnemy.text}”
+              <cite>— {QUOTES.grahamEnemy.author}，{QUOTES.grahamEnemy.book}</cite>
+            </span>
           </div>
         </div>
 

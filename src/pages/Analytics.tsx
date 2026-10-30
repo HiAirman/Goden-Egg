@@ -18,6 +18,8 @@ import { useStore } from '../store/AppStore'
 import { Badge, Card, EmptyState, PageHeader } from '../components/ui'
 import { EquityChart, MonthlyBarChart } from '../components/charts'
 import { formatCompact, formatCurrency, formatMoney, formatPct, pnlClass } from '../lib/format'
+import { QUOTES } from '../data/quotes'
+import { QuoteLine } from '../components/BookQuote'
 import type { Snapshot } from '../types'
 
 function maxDrawdown(snapshots: Snapshot[]): { value: number; peakDate: string; troughDate: string } {
@@ -82,7 +84,11 @@ export function Analytics() {
   if (!hasTrades) {
     return (
       <div className="page analytics-page">
-        <PageHeader eyebrow="复盘与迭代 / 分析" title="数据不会评价你，但会告诉你真相" description="完成几笔交易后，这里会出现你的交易画像。" />
+        <PageHeader
+          eyebrow="复盘与迭代 / 分析"
+          title="交易分析"
+          description={<QuoteLine quote={QUOTES.dimsonRisk} />}
+        />
         <Card className="panel">
           <EmptyState
             icon={<BarChart3 size={32} />}
@@ -98,8 +104,13 @@ export function Analytics() {
     <div className="page analytics-page">
       <PageHeader
         eyebrow="复盘与迭代 / 分析"
-        title="数据不会评价你，但会告诉你真相"
-        description={`基于 ${scopedTradeCount} 笔交易、${totalClosed} 笔已平仓卖出计算。`}
+        title="交易分析"
+        description={
+          <>
+            <QuoteLine quote={QUOTES.dimsonRisk} />
+            <span className="page-header-meta">基于 {scopedTradeCount} 笔交易、{totalClosed} 笔已平仓卖出计算。</span>
+          </>
+        }
         actions={<Badge tone="neutral"><Activity size={12} /> 实时重算</Badge>}
       />
 
@@ -139,7 +150,7 @@ export function Analytics() {
           <div className="panel-head">
             <div>
               <span className="panel-kicker">资产走势</span>
-              <h2>回撤，是复利的另一面</h2>
+              <h2>回撤与风险</h2>
             </div>
             <Badge tone={drawdown.value < -10 ? 'down' : 'neutral'}>
               最大回撤 {drawdown.value.toFixed(1)}%
@@ -192,7 +203,7 @@ export function Analytics() {
           <div className="panel-head">
             <div>
               <span className="panel-kicker">交易质量</span>
-              <h2>让利润奔跑，还是让亏损奔跑？</h2>
+              <h2>盈利与亏损分布</h2>
             </div>
             <Target size={18} className="muted-icon" />
           </div>
