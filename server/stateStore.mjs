@@ -1,7 +1,7 @@
 import { copyFile, mkdir, readFile, readdir, rename, rm, stat, writeFile } from 'node:fs/promises'
 import { join, resolve } from 'node:path'
 
-const dataDir = resolve(process.cwd(), 'data')
+const dataDir = resolve(process.env.GODEN_EGG_DATA_DIR || join(process.cwd(), 'data'))
 const stateFile = join(dataDir, 'state.json')
 const backupDir = join(dataDir, 'backups')
 
